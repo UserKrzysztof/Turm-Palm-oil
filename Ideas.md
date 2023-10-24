@@ -27,6 +27,6 @@ Q3: Oils nutrition
 Data for Q3: 
 
 ----------------------------------------------
-Q4: Is there a correlation between palm oil production/availability and excess weight?
+Q4: Is there a correlation between palm oil production/availability and overweight?
 Data for Qe:
 https://www.fao.org/faostat/en/#data/FS - check "items"
