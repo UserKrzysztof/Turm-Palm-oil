@@ -15,7 +15,7 @@ df %>%
   View()
 
 df %>% 
-  filter(Element == "Import Quantity" & Item == "Palm oil") -> tmp
+  filter(Element == "Import Value" & Item == "Palm oil") -> tmp
 unique(tmp$Unit)
 
 df %>% 
@@ -54,7 +54,8 @@ gr_by_rc_df %>%
 gr_by_rc_df %>% 
   pivot_longer(Y1986:Y2021, names_to = "year") %>% 
   group_by(year, Element) %>% 
-  summarise(total = sum(value, na.rm =T)) -> longer_year_ie_df
+  summarise(total = sum(value, na.rm =T)) %>% 
+  mutate(continent = "Ocenania") -> longer_year_ie_df
 
 year_ie_df %>% 
   ggplot(aes(x = as.factor(year), y = `Import Quantity`)) +
