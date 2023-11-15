@@ -22,7 +22,7 @@ df2 %>%
   filter(Element == "Production") %>% 
   pivot_longer(matches("Y[0-9]{4}"), names_to = "year") %>% 
   mutate(year = as.double(substr(year,2,length(year))),
-         value = value/1000000)-> df3
+         value = value/1000)-> df3
   
   
 ggplot(df3, aes(
@@ -31,8 +31,6 @@ ggplot(df3, aes(
   color = Item,
   shape = Item
 )) +
-  geom_vline(xintercept = c(2020,seq(1961,2020,4)),linetype = "longdash", color = "#303030")+
-  geom_hline(yintercept = seq(0,80,2),linetype = "dotted", color = "#303030")+
   geom_point() +
   geom_line() +
   scale_shape_manual(values = c(0, 1, 2, 3, 16, 7, 8, 9, 10)) +
@@ -53,21 +51,14 @@ ggplot(df3, aes(
     axis.text = element_text(colour = "white"),
     axis.line = element_line(colour = "#303030"),
     plot.background = element_rect(fill = "black"),
-    panel.grid.minor = element_blank(),
-    #panel.grid.minor = element_line(color = "#303030"),
+    panel.grid.minor  = element_blank(),
     panel.grid.major = element_line(color = "#303030"),
     panel.background = element_rect(fill = "black"),
     legend.position = "bottom",
     legend.background = element_rect(fill = "black"),
-    legend.key = element_rect(fill = "black"),
+    legend.key = element_rect(fill = "black")
   ) +
-  labs(title = "Procuction of oils over the years"
-       )+
   xlab("Year") +
-  ylab("Production (1M tonnes)") +
-  scale_y_continuous(expand = c(0,0), limits = c(0,82), breaks = seq(0,80,20))+
-  scale_x_continuous(expand = c(0,0), 
-                     limits = c(1961,2022) ,
-                     breaks = c(2020,seq(1961,2020,12)))
+  ylab("Production (1000 tonnes)")
   
 
