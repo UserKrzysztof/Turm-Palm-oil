@@ -24,22 +24,21 @@ df2 %>%
   mutate(year = as.double(substr(year,2,length(year))),
          value = value/1000000)-> df3
   
-colnames(df3)<- c("Oil", "Element", "Unit",    "year" ,  "value"  )
   
 ggplot(df3, aes(
   x = year,
   y = value,
-  color = Oil,
-  shape = Oil
+  color = Item,
+  shape = Item
 )) +
   geom_vline(xintercept = c(2020,seq(1961,2020,4)),linetype = "longdash", color = "#303030")+
   geom_hline(yintercept = seq(0,80,2),linetype = "dotted", color = "#303030")+
-  geom_point(size = 2.7) +
+  geom_point() +
   geom_line() +
   scale_shape_manual(values = c(0, 1, 2, 3, 16, 7, 8, 9, 10)) +
   scale_color_manual(
     values = c(
-      "#77777e",
+      "#777b7e",
       "#777b7e",
       "#777b7e",
       "#777b7e",
@@ -50,27 +49,25 @@ ggplot(df3, aes(
     )
   ) +
   theme(
-    text = element_text(colour = "white", size = 16),
+    text = element_text(colour = "white"),
     axis.text = element_text(colour = "white"),
     axis.line = element_line(colour = "#303030"),
-    plot.background = element_rect(fill = "transparent", color = NA),
+    plot.background = element_rect(fill = "black"),
     panel.grid.minor = element_blank(),
     #panel.grid.minor = element_line(color = "#303030"),
     panel.grid.major = element_line(color = "#303030"),
-    panel.background = element_rect(fill = "transparent"),
+    panel.background = element_rect(fill = "black"),
     legend.position = "bottom",
-    legend.background = element_rect(fill = "transparent"),
-    legend.key = element_rect(fill = "transparent"),
-    legend.key.size = unit(0.5,"cm"),
+    legend.background = element_rect(fill = "black"),
+    legend.key = element_rect(fill = "black"),
   ) +
+  labs(title = "Procuction of oils over the years"
+       )+
   xlab("Year") +
-  ylab("Production (million tonnes)") +
+  ylab("Production (1M tonnes)") +
   scale_y_continuous(expand = c(0,0), limits = c(0,82), breaks = seq(0,80,20))+
   scale_x_continuous(expand = c(0,0), 
                      limits = c(1961,2022) ,
-                     breaks = c(2020,seq(1961,2020,12)))-> p
-
-ggsave("plot_trasparent1px.png", plot = p, bg = "transparent", width = 12, height = 6)
-
+                     breaks = c(2020,seq(1961,2020,12)))
   
 
